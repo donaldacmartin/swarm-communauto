@@ -20,11 +20,10 @@ def publish_vehicles(vehicles: List[Vehicle], config: MQTTConfig) -> None:
 
     try:
         info("Publishing payload to MQTT")
-        payload = dumps([asdict(vehicle) for vehicle in vehicles])
 
         single(
             topic=config.topic,
-            payload=dumps(payload),
+            payload=dumps([asdict(vehicle) for vehicle in vehicles]),
             hostname=config.host,
             port=config.port,
             client_id=config.client_id,
